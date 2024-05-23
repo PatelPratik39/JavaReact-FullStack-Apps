@@ -19,16 +19,16 @@ const ListEmployee = () => {
     <>
       <div className="conatiner">
         <h2 className="text-center"> List of Employees</h2>
-        <table className="table table-striped table-bordered">
+        <table className="table table-striped table-bordered table-hover">
           <thead>
-            <tr>
+            <tr className="text-center">
               <th> Emp Id </th>
               <th> Emp First Name </th>
               <th> Emp Last Name </th>
               <th> Emp Email </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center">
             {employees.map((employee) => (
               <tr key={employee.id}>
                 <td>{employee.id}</td>
