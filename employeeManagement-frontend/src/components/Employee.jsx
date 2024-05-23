@@ -6,7 +6,7 @@ import {
 } from "../services/EmployeeService";
 import { useNavigate, useParams } from "react-router-dom";
 
-const EmployeeComponent = () => {
+const Employee = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -162,7 +162,7 @@ const EmployeeComponent = () => {
                 className="btn btn-success"
                 onClick={saveOrUpdateEmployee}
               >
-                Add Employee
+                Submit
               </button>
             </form>
           </div>
@@ -172,4 +172,4 @@ const EmployeeComponent = () => {
   );
 };
 
-export default EmployeeComponent;
+export default Employee;

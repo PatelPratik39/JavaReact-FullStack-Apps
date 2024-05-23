@@ -75,6 +75,7 @@ const ListEmployee = () => {
                   <button
                     className="btn btn-danger"
                     onClick={() => removeEmployee(employee.id)}
+                    style={{marginLeft:'20px'}}
                   >
                     Delete
                   </button>
