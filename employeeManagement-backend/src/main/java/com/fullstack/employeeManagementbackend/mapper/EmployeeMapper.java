@@ -10,7 +10,8 @@ public class EmployeeMapper {
                 employee.getId(),
                 employee.getFirstName(),
                 employee.getLastName(),
-                employee.getEmail()
+                employee.getEmail(),
+                employee.getDepartment().getId()
         );
     }
     public static Employee mapToEmployee(EmployeeDTO employeeDTO){

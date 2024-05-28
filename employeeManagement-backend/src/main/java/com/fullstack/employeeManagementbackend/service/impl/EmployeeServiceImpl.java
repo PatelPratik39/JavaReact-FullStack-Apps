@@ -1,6 +1,7 @@
 package com.fullstack.employeeManagementbackend.service.impl;
 
 import com.fullstack.employeeManagementbackend.dto.EmployeeDTO;
+import com.fullstack.employeeManagementbackend.entity.Department;
 import com.fullstack.employeeManagementbackend.entity.Employee;
 import com.fullstack.employeeManagementbackend.exception.ResourceNotFoundException;
 import com.fullstack.employeeManagementbackend.mapper.EmployeeMapper;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl  implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
+
     private DepartmentRepository departmentRepository;
 
     /*
@@ -29,11 +31,16 @@ public class EmployeeServiceImpl  implements EmployeeService {
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
 
         Employee employee = EmployeeMapper.mapToEmployee(employeeDTO);
-//        now I want to add the employee object save into database means my employeeRepository, so I need to create
-//        a variable where i will store
-
+//    to use deprtment id from department DTO to employeeDTO
+        Department department = departmentRepository.findById(employeeDTO.getDepartmentId())
+                .orElseThrow(
+                () -> new ResourceNotFoundException("Department is not exist with ID : " + employeeDTO.getDepartmentId())
+        );
+        employee.setDepartment(department);
+        //        now I want to add the employee object save into a database means my employeeRepository, so I need to create
+//        a variable where I will store
         Employee savedEmployee = employeeRepository.save(employee);
-//        now I want to send the savedEmployee object to client using EmployeeMapper.maptoEMployeeDto method
+//        now I want to send the savedEmployee object to a client using EmployeeMapper.maptoEMployeeDto method
 
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
     }
@@ -41,13 +48,13 @@ public class EmployeeServiceImpl  implements EmployeeService {
 
     /*
 
-    In order to create a method for getEmployee using employeeID, i need to check if id present or not ,
+    To create a method for getEmployee using employeeID, i need to check if id present or not,
     so for that I need to create an Exception class -> exception package -> ResourceNotFoundException.
 
     Now to implement getEmployee Method , I need to create a local variable "employee" from Employee class
-    where I am going to find an employee using employeeId from employee repository JPA, If employeeID( resource ) is not present then
+    where I am going to find an employee using employeeId from employee repository JPA, If employeeID( resource ) is not present, then
     it should throw an exception message with given ID from "ResourceNotFoundException" class that extends RunTimeException class exception package.
-    after that i need to return a employeeDTO so i need to convert employee JPA object into dto object using Mapper method with mapToEmployee method with JPA Entity Object (employee)
+    After that, I need to return an employeeDTO so i need to convert an employee JPA object into a dto object using Mapper method with mapToEmployee method with JPA Entity Object (employee)
      */
     @Override
     public EmployeeDTO getEmployeeById(Long employeeId) {
@@ -70,6 +77,12 @@ public class EmployeeServiceImpl  implements EmployeeService {
         employee.setFirstName(updatedEmployee.getFirstName());
         employee.setLastName(updatedEmployee.getLastName());
         employee.setEmail(updatedEmployee.getEmail());
+
+        Department department = departmentRepository.findById(updatedEmployee.getDepartmentId())
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Department is not exist with ID : " + updatedEmployee.getDepartmentId())
+                );
+        employee.setDepartment(department);
 
        Employee updateEmployeeObj =  employeeRepository.save(employee);
         return EmployeeMapper.mapToEmployeeDto(updateEmployeeObj);
