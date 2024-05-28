@@ -3,9 +3,7 @@ import axios from "axios";
 const BASE_URL = "http://localhost:8080/api/employees";
 
 // All Employee REST API call
-export const listEmployees = () => {
-  return axios.get(BASE_URL);
-};
+export const listEmployees = () => axios.get(BASE_URL);
 
 // Create Employee REST API call
 export const createEmployee = (employee) => {

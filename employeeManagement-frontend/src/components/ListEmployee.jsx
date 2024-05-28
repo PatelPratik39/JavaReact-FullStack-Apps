@@ -51,7 +51,7 @@ const ListEmployee = () => {
         <table className="table table-striped table-bordered table-hover ">
           <thead>
             <tr className="text-center table-info p-5">
-              <th className="table-suceess"> Emp Id </th>
+              <th className="table-success"> Emp Id </th>
               <th className="table-warning"> Emp First Name </th>
               <th className="table-danger"> Emp Last Name </th>
               <th className="table-primary"> Emp Email </th>
@@ -70,14 +70,18 @@ const ListEmployee = () => {
                     className="btn btn-warning"
                     onClick={() => updateEmployee(employee.id)}
                   >
-                    Update
+                    <i className="bi bi-pencil-square">
+                      <img src="../../public/pencil-square.svg" />
+                    </i>
                   </button>
                   <button
                     className="btn btn-danger"
                     onClick={() => removeEmployee(employee.id)}
-                    style={{marginLeft:'20px'}}
+                    style={{ marginLeft: "20px" }}
                   >
-                    Delete
+                    <i className="bi bi-trash3-fill">
+                      <img src="../../public/trash3-fill.svg" />
+                    </i>
                   </button>
                 </td>
               </tr>

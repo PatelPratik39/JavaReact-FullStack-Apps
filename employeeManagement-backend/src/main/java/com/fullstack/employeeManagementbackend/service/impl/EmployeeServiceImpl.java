@@ -4,6 +4,7 @@ import com.fullstack.employeeManagementbackend.dto.EmployeeDTO;
 import com.fullstack.employeeManagementbackend.entity.Employee;
 import com.fullstack.employeeManagementbackend.exception.ResourceNotFoundException;
 import com.fullstack.employeeManagementbackend.mapper.EmployeeMapper;
+import com.fullstack.employeeManagementbackend.repository.DepartmentRepository;
 import com.fullstack.employeeManagementbackend.repository.EmployeeRepository;
 import com.fullstack.employeeManagementbackend.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl  implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
+    private DepartmentRepository departmentRepository;
 
     /*
     below createEmployee method I need to convert employeeDTO to Employee JPA entity

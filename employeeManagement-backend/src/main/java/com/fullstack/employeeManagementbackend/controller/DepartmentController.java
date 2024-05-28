@@ -1,15 +1,15 @@
 package com.fullstack.employeeManagementbackend.controller;
 
 import com.fullstack.employeeManagementbackend.dto.DepartmentDTO;
-
 import com.fullstack.employeeManagementbackend.service.DepartmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+
+@CrossOrigin("*")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/departments")

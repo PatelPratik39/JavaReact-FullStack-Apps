@@ -133,7 +133,9 @@ const Employee = () => {
           <div className="card-body">
             <form>
               <div className="form-group mb-2">
-                <label className="form-label">First Name:</label>
+                <label className="form-label">
+                  <b>First Name : </b>
+                </label>
                 <input
                   type="text"
                   placeholder="Enter Employee First Name"
@@ -150,7 +152,9 @@ const Employee = () => {
               </div>
 
               <div className="form-group mb-2">
-                <label className="form-label">Last Name:</label>
+                <label className="form-label">
+                  <b> Last Name : </b>
+                </label>
                 <input
                   type="text"
                   placeholder="Enter Employee Last Name"
@@ -167,7 +171,9 @@ const Employee = () => {
               </div>
 
               <div className="form-group mb-2">
-                <label className="form-label">Email:</label>
+                <label className="form-label">
+                  <b>Email : </b>
+                </label>
                 <input
                   type="text"
                   placeholder="Enter Employee Email"
@@ -180,13 +186,14 @@ const Employee = () => {
                   <div className="invalid-feedback"> {errors.email} </div>
                 )}
               </div>
-
-              <button
-                className="btn btn-success"
-                onClick={saveOrUpdateEmployee}
-              >
-                Submit
-              </button>
+              <div className="d-flex justify-content-center">
+                <button
+                  className="btn btn-success btn-lg btn-block"
+                  onClick={saveOrUpdateEmployee}
+                >
+                  Submit
+                </button>
+              </div>
             </form>
           </div>
         </div>
