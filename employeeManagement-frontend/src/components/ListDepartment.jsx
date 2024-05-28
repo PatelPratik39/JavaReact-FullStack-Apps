@@ -76,7 +76,7 @@ const ListDepartment = () => {
                     className="btn btn-danger"
                   >
                     <i className="bi bi-trash3">
-                      <img src="./public/trash3-fill.svg" />
+                      <img src="/trash3-fill.svg" />
                     </i>
                   </button>
                 </td>

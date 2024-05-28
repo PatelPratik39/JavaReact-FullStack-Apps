@@ -71,7 +71,7 @@ const ListEmployee = () => {
                     onClick={() => updateEmployee(employee.id)}
                   >
                     <i className="bi bi-pencil-square">
-                      <img src="../../public/pencil-square.svg" />
+                      <img src="/pencil-square.svg" />
                     </i>
                   </button>
                   <button
@@ -80,7 +80,7 @@ const ListEmployee = () => {
                     style={{ marginLeft: "20px" }}
                   >
                     <i className="bi bi-trash3-fill">
-                      <img src="../../public/trash3-fill.svg" />
+                      <img src="/trash3-fill.svg" />
                     </i>
                   </button>
                 </td>
