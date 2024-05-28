@@ -18,7 +18,7 @@ const Employee = () => {
     email: ""
   });
 
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -45,7 +45,7 @@ const Employee = () => {
         updateEmployee(id, employee)
           .then((response) => {
             console.log(response.data);
-            navigator("/employees");
+            navigate("/employees");
           })
           .catch((error) => {
             console.error(error);
@@ -54,7 +54,7 @@ const Employee = () => {
         createEmployee(employee)
           .then((response) => {
             console.log(response.data);
-            navigator("/employees");
+            navigate("/employees");
           })
           .catch((error) => {
             console.error(error);
@@ -62,6 +62,29 @@ const Employee = () => {
       }
     }
   }
+
+  // function saveOrUpdateEmployee(e) {
+  //   e.preventDefault();
+  //   if (validateForm()) {
+  //     const employee = { firstName, lastName, email };
+  //     console.log(employee);
+
+  //     if (id) {
+  //       updateEmployee(id, employee).then((response) => {
+  //         console.log(response.data);
+  //       });
+  //     } else {
+  //       createEmployee(employee)
+  //         .then((response) => {
+  //           console.log(response.data);
+  //           navigate("/employees");
+  //         })
+  //         .catch((error) => {
+  //           console.error(error);
+  //         });
+  //     }
+  //   }
+  // }
 
   function validateForm() {
     let valid = true;

@@ -14,7 +14,7 @@ export const createEmployee = (employee) => {
 
 // Get Employee using ID REST API call
 export const getEmployee = (employeeId) => {
-  return axios.get(BASE_URL, +"/" + employeeId);
+  return axios.get(BASE_URL + "/" + employeeId);
 };
 
 // Update EMployee based on ID
@@ -24,5 +24,5 @@ export const updateEmployee = (employeeId, employee) => {
 
 // Delete Employee basd on Id
 export const deleteEmployee = (employeeId) => {
-  return axios.delete(BASE_URL, +"/" + employeeId);
+  return axios.delete(BASE_URL + "/" + employeeId);
 };
