@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { getAllTodos } from "../services/TodoService";
+import { useNavigate } from "react-router-dom";
 
 const ListTodo = () => {
   const [todos, setTodos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     listTods();
@@ -19,10 +21,17 @@ const ListTodo = () => {
       });
   };
 
+  const addNewTodo = () => {
+    navigate("/addTodo");
+  };
+
   return (
     <>
       <div className="container">
         <h2 className="text-center"> List of Todos </h2>
+        <button className="btn btn-info mb-3" onClick={addNewTodo}>
+          Add Todo
+        </button>
         <div>
           <table className="table table-bordered table-striped">
             <thead>
