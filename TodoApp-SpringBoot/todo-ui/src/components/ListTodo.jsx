@@ -1,29 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getAllTodos } from "../services/TodoService";
 
 const ListTodo = () => {
-  const dumyData = [
-    {
-      id: 1,
-      title: "Learn SpringBoot",
-      description:
-        "SpringBoot is essential to learn for Full stack App Development",
-      completed: true
-    },
-    {
-      id: 2,
-      title: "Learn MERN / PERN",
-      description:
-        "MERN is essential to learn for Full stack Skill Development for WEB Developers",
-      completed: true
-    },
-    {
-      id: 3,
-      title: "Learn ReactJs",
-      description: "React JS is best technologu for Front ENd Development",
-      completed: false
-    }
-  ];
-  const [todos, setTodos] = useState(dumyData);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    listTods();
+  }, []);
+
+  const listTods = () => {
+    getAllTodos()
+      .then((resposne) => {
+        console.log(resposne.data);
+        setTodos(resposne.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <>
