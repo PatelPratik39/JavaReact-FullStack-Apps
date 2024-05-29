@@ -20,4 +20,10 @@ public interface TodoService {
 
 //    DELETE Todo
     void deleteTodo(Long id);
+
+//    Completed Todo
+    TodoDTO completeTodo(Long id);
+
+//    InComplete Todo
+    TodoDTO inCompleteTodo(Long id);
 }
