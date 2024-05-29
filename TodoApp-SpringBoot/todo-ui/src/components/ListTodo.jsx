@@ -96,14 +96,7 @@ const ListTodo = () => {
                       {" "}
                       Update{" "}
                     </button>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => removeTodo(todo.id)}
-                      style={{ marginLeft: "10px" }}
-                    >
-                      {" "}
-                      Delete{" "}
-                    </button>
+
                     <button
                       className="btn btn-success"
                       onClick={() => completeTodo(todo.id)}
@@ -118,7 +111,15 @@ const ListTodo = () => {
                       style={{ marginLeft: "10px" }}
                     >
                       {" "}
-                      InComplete{" "}
+                      Not Complete{" "}
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => removeTodo(todo.id)}
+                      style={{ marginLeft: "10px" }}
+                    >
+                      {" "}
+                      Delete{" "}
                     </button>
                   </td>
                 </tr>

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 
 public class TodoAppUsingReactNSpringbootApplication {
+
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
