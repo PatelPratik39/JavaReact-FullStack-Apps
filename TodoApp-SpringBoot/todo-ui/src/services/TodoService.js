@@ -17,3 +17,9 @@ export const updateTodo = (id, todo) => axios.put(URL + "/" + id, todo);
 
 // DELETE REST CLient API call
 export const deleteTodo = (id) => axios.delete(URL + "/" + id);
+
+// Patch
+export const completedTodo = (id) => axios.patch(URL + "/" + id + "/complete");
+
+// Patch
+export const inCompletedTodo = (id) => axios.patch(URL + "/" + id + "/in-complete");
