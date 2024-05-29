@@ -9,9 +9,11 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
-
 public class TodoServiceImpl implements TodoService {
 
     private TodoRepository todoRepository;
@@ -30,10 +32,42 @@ public class TodoServiceImpl implements TodoService {
         return savedTodoDTO;
     }
 
+//    Get todo using ID
     @Override
     public TodoDTO getTodo(Long id) {
        Todo todo = todoRepository.findById(id)
                .orElseThrow(() -> new ResourceNotFoundException("Todo Not found with this ID : " + id));
        return modelMapper.map(todo, TodoDTO.class); //convert todo jpa object to TodoDTO object
     }
+
+//    Get All Todos
+    @Override
+    public List<TodoDTO> getAllTodos() {
+        List<Todo> todos = todoRepository.findAll();
+        return todos.stream().map((todo) -> modelMapper.map(todo, TodoDTO.class)).collect(Collectors.toList());
+    }
+
+//    Update TODO
+    @Override
+    public TodoDTO updateTodo(TodoDTO todoDTO, Long id) {
+
+       Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Todo Not found with this ID : " + id));
+       todo.setTitle(todoDTO.getTitle());
+       todo.setDescription(todoDTO.getDescription());
+       todo.setCompleted(todoDTO.isCompleted());
+
+       Todo updatedTodo =  todoRepository.save(todo);
+        return modelMapper.map(updatedTodo, TodoDTO.class);
+    }
+
+//    DELETE TODO method
+    @Override
+    public void deleteTodo(Long id) {
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Todo Not found with this ID : " + id) );
+        todoRepository.deleteById(id);
+    }
+
+
 }

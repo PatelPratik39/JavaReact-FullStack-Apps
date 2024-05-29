@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/todos")
@@ -27,5 +29,28 @@ public class TodoController {
     public ResponseEntity<TodoDTO> getTodo(@PathVariable("id") Long todoId){
        TodoDTO todoDTO = todoService.getTodo(todoId);
        return new ResponseEntity<>(todoDTO, HttpStatus.OK);
+    }
+
+//    Build GetAll Todos REST API
+    @GetMapping
+    public ResponseEntity<List<TodoDTO>> getAllTodos() {
+        List<TodoDTO> todos =  todoService.getAllTodos();
+//        return new ResponseEntity<>(todos, HttpStatus.OK);
+        return ResponseEntity.ok(todos);
+    }
+
+//    Build Update Todo REST API
+    @PutMapping("{id}")
+    public ResponseEntity<TodoDTO> updateTodo (@RequestBody TodoDTO todoDTO, @PathVariable("id") Long todoId){
+       TodoDTO updatedTodo = todoService.updateTodo(todoDTO, todoId);
+       return ResponseEntity.ok(updatedTodo);
+    }
+
+
+//    Build DELETE TODO REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteTodo(@PathVariable("id") Long todoId){
+        todoService.deleteTodo(todoId);
+        return ResponseEntity.ok("TODO DELETED Successfully!!!!");
     }
 }
