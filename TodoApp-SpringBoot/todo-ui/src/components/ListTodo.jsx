@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAllTodos } from "../services/TodoService";
+import { deleteTodo, getAllTodos } from "../services/TodoService";
 import { useNavigate } from "react-router-dom";
 
 const ListTodo = () => {
@@ -23,6 +23,19 @@ const ListTodo = () => {
 
   const addNewTodo = () => {
     navigate("/addTodo");
+  };
+  const updateTodo = (id) => {
+    console.log(id);
+    navigate(`/updateTodo/${id}`);
+  };
+  const removeTodo = (id) => {
+    deleteTodo(id)
+      .then((response) => {
+        listTods();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -50,7 +63,25 @@ const ListTodo = () => {
                   <td>{todo.title}</td>
                   <td>{todo.description}</td>
                   <td>{todo.completed ? "Yes" : "No"}</td>
-                  <td>{todo.action}</td>
+                  <td>
+                    <div className="justify-between">
+                      <button
+                        className="btn btn-warning"
+                        onClick={() => updateTodo(todo.id)}
+                      >
+                        {" "}
+                        Update{" "}
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => removeTodo(todo.id)}
+                        style={{ marginLeft: "10px" }}
+                      >
+                        {" "}
+                        Delete{" "}
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>

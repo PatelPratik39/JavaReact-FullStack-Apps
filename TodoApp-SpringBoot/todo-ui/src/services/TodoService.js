@@ -8,3 +8,12 @@ export const getAllTodos = () => axios.get(URL);
 
 // addTodo to db
 export const saveTodo = (todo) => axios.post(URL, todo);
+
+// GETTodo REST API call
+export const getTodo = (id) => axios.get(URL + "/" + id);
+
+// UPDATE TODO
+export const updateTodo = (id, todo) => axios.put(URL + "/" + id, todo);
+
+// DELETE REST CLient API call
+export const deleteTodo = (id) => axios.delete(URL + "/" + id);
