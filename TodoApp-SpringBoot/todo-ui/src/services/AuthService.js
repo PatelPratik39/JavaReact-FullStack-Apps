@@ -1,9 +1,13 @@
 import axios from "axios";
 
-const AUTH_BASE_URL = "http://localhost:8080/api/auth";
+const AUTH_URL = "http://localhost:8080/api/auth";
 
-export const registerAPICall = (registerObj) =>
-  axios.post(AUTH_BASE_URL + "/register", registerObj);
+export const registerAPICall = (registerobj) =>
+  axios.post(AUTH_URL + "/register", registerobj);
 
-export const loginAPICall = (loginObj) =>
-  axios.post(AUTH_BASE_URL + "/login", loginObj);
+export const loginAPICall = (usernameOrEmail, password) =>
+  axios.post(AUTH_URL + "/login", { usernameOrEmail, password });
+
+export const storeToken = (token) => localStorage.setItem("token", token);
+
+export const getToken = () => localStorage.getItem("token");

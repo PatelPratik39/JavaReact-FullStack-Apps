@@ -24,8 +24,6 @@ public class SpringSecurityConfig {
 
     private UserDetailsService userDetailsService;
 
-
-
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -43,9 +41,10 @@ public class SpringSecurityConfig {
 //            authorize.requestMatchers(HttpMethod.PATCH, "/api/**").hasAnyRole("ADMIN","USER");
 //            authorize.requestMatchers(HttpMethod.GET, "api/**").permitAll();
             authorize.requestMatchers("/api/auth/**").permitAll();
+            authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
             authorize.anyRequest().authenticated();
         }).httpBasic(Customizer.withDefaults());
-        return  http.build();
+        return http.build();
     }
 
 //    Authenticate Manager
@@ -62,11 +61,11 @@ public class SpringSecurityConfig {
 //                .roles("USER")
 //                .build();
 //        UserDetails admin = User.builder()
-//        .username("admin")
-//        .password(passwordEncoder()
-//        .encode("admin"))
-//        .roles("ADMIN")
-//        .build();
+//                 .username("admin")
+//                  .password(passwordEncoder()
+//                  .encode("admin"))
+//                  .roles("ADMIN")
+//                  .build();
 //
 //        return new InMemoryUserDetailsManager(mangoo, admin);
 //    }

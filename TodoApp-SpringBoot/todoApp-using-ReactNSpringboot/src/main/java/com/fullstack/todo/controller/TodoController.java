@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @CrossOrigin("*")
 @RestController
+@RequestMapping("api/todos")
 @AllArgsConstructor
-@RequestMapping("/api/todos")
 public class TodoController {
 
     private TodoService todoService;
@@ -75,7 +74,7 @@ public class TodoController {
     @PatchMapping("{id}/in-complete")
     public  ResponseEntity<TodoDTO> inCompleteTodo(@PathVariable("id")Long todoId){
         TodoDTO updatedTodo = todoService.inCompleteTodo(todoId);
-        return  ResponseEntity.ok(updatedTodo);
+        return ResponseEntity.ok(updatedTodo);
     }
 
 }

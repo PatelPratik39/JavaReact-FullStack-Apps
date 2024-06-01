@@ -6,20 +6,35 @@ const ListTodo = () => {
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     listTodos();
-  }, []);
+  },[])
 
   const listTodos = () => {
     getAllTodos()
-      .then((resposne) => {
-        console.log(resposne.data);
-        setTodos(resposne.data);
+      .then((response) => {
+        setTodos(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
-  };
+  }
+
+  // useEffect(() => {
+  //   listTodos();
+  // }, []);
+
+  // const listTodos = () => {
+  //   getAllTodos()
+  //     .then((resposne) => {
+  //       console.log(resposne.data);
+  //       setTodos(resposne.data);
+  //     })
+      // .catch((error) => {
+      //   console.error(error);
+      // });
+  // };
 
   const addNewTodo = () => {
     navigate("/addTodo");

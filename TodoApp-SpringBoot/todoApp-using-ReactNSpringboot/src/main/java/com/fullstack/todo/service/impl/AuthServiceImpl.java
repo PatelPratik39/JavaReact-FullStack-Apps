@@ -39,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
 
 //        Check email is already present in a database
         if(userRepository.existsByEmail(registerDTO.getEmail())){
-            throw new TodoAPIException(HttpStatus.BAD_REQUEST, "Email is already Exists!!!1");
+            throw new TodoAPIException(HttpStatus.BAD_REQUEST, "Email is already Exists!!!");
         }
 
 //        User Jpa Object

@@ -1,9 +1,23 @@
 // this is Service class which integrates with backedn API for REST API
 
 import axios from "axios";
+import { getToken } from "./AuthService";
+
 const URL = "http://localhost:8080/api/todos";
 
-// getAll TOdos
+// Add a request interceptor
+// axios.interceptors.request.use(
+//   function (config) {
+//     config.headers["Authorization"] = getToken();
+//     return config;
+//   },
+//   function (error) {
+//     // Do something with request error
+//     return Promise.reject(error);
+//   }
+// );
+
+// getAll Todos
 export const getAllTodos = () => axios.get(URL);
 
 // addTodo to db
@@ -22,4 +36,5 @@ export const deleteTodo = (id) => axios.delete(URL + "/" + id);
 export const completedTodo = (id) => axios.patch(URL + "/" + id + "/complete");
 
 // Patch
-export const inCompletedTodo = (id) => axios.patch(URL + "/" + id + "/in-complete");
+export const inCompletedTodo = (id) =>
+  axios.patch(URL + "/" + id + "/in-complete");

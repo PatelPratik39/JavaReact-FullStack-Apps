@@ -1,7 +1,6 @@
 package com.fullstack.todo.exceptions;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,12 +13,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(TodoAPIException.class)
     public ResponseEntity<ErrorDetails> handleTodoAPIException(TodoAPIException exception, WebRequest webRequest){
+
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
                 exception.getMessage(),
                 webRequest.getDescription(false)
         );
+
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
-
 }

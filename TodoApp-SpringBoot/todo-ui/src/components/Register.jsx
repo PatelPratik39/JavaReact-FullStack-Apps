@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { registerAPICall } from "../services/AuthService";
 
 const Register = () => {
@@ -6,16 +7,20 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegistration = (e) => {
     e.preventDefault();
     const register = { name, username, email, password };
-        console.log(register);
-    registerAPICall(register).then((response) => {
+    console.log(register);
+    registerAPICall(register)
+      .then((response) => {
         console.log(response.data);
-    }).catch(error => {
+        navigate('/login')
+      })
+      .catch((error) => {
         console.error(error);
-    })
+      });
   };
 
   return (
@@ -87,9 +92,9 @@ const Register = () => {
                       />
                     </div>
                   </div>
-                  <div className="form-group mb-3 ">
+                  <div className="form-group mt-5 mb-3 d-flex justify-content-center">
                     <button
-                      className="btn btn-success"
+                      className="btn btn-success w-50 "
                       onClick={(e) => handleRegistration(e)}
                     >
                       {" "}
