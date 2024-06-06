@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getContact } from "../api/ContactService";
-import { toastError, toastSuccess } from "../api/ToastService";
+import { getContact } from "../api/contactServie.js";
+import { toastError, toastSuccess } from "../api/ToastService.js";
+import "react-toastify/dist/ReactToastify.css";
 
-const ContactDetail = ({ updateContact, updateImage }) => {
+const ContactDetails = ({ updateContact, updateImage }) => {
   const inputRef = useRef();
+  const { id } = useParams();
   const [contact, setContact] = useState({
     id: "",
     name: "",
@@ -16,16 +18,14 @@ const ContactDetail = ({ updateContact, updateImage }) => {
     photoUrl: ""
   });
 
-  const { id } = useParams();
-
   const fetchContact = async (id) => {
     try {
       const { data } = await getContact(id);
       setContact(data);
       console.log(data);
-      //toastSuccess('Contact retrieved');
+      toastSuccess("Contact retrieved");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toastError(error.message);
     }
   };
@@ -34,7 +34,7 @@ const ContactDetail = ({ updateContact, updateImage }) => {
     inputRef.current.click();
   };
 
-  const udpatePhoto = async (file) => {
+  const updatePhoto = async (file) => {
     try {
       const formData = new FormData();
       formData.append("file", file, file.name);
@@ -46,7 +46,7 @@ const ContactDetail = ({ updateContact, updateImage }) => {
       }));
       toastSuccess("Photo updated");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toastError(error.message);
     }
   };
@@ -57,18 +57,22 @@ const ContactDetail = ({ updateContact, updateImage }) => {
 
   const onUpdateContact = async (event) => {
     event.preventDefault();
-    await updateContact(contact);
-    fetchContact(id);
-    toastSuccess("Contact Updated");
+    try {
+      await updateContact(contact);
+      toastSuccess("Contact updated");
+    } catch (error) {
+      console.error(error);
+      toastError(error.message);
+    }
   };
 
   useEffect(() => {
     fetchContact(id);
-  }, []);
+  }, [id]);
 
   return (
     <>
-      <Link to={"/contacts"} className="link">
+      <Link to="/contacts" className="link">
         <i className="bi bi-arrow-left"></i> Back to list
       </Link>
       <div className="profile">
@@ -79,7 +83,7 @@ const ContactDetail = ({ updateContact, updateImage }) => {
           />
           <div className="profile__metadata">
             <p className="profile__name">{contact.name}</p>
-            <p className="profile__muted">JPG, GIF, or PNG. Max size of 10MG</p>
+            <p className="profile__muted">JPG, GIF, or PNG. Max size of 10MB</p>
             <button onClick={selectImage} className="btn">
               <i className="bi bi-cloud-upload"></i> Change Photo
             </button>
@@ -89,12 +93,7 @@ const ContactDetail = ({ updateContact, updateImage }) => {
           <div>
             <form onSubmit={onUpdateContact} className="form">
               <div className="user-details">
-                <input
-                  type="hidden"
-                  defaultValue={contact.id}
-                  name="id"
-                  required
-                />
+                <input type="hidden" value={contact.id} name="id" required />
                 <div className="input-box">
                   <span className="details">Name</span>
                   <input
@@ -170,7 +169,7 @@ const ContactDetail = ({ updateContact, updateImage }) => {
         <input
           type="file"
           ref={inputRef}
-          onChange={(event) => udpatePhoto(event.target.files[0])}
+          onChange={(event) => updatePhoto(event.target.files[0])}
           name="file"
           accept="image/*"
         />
@@ -179,4 +178,4 @@ const ContactDetail = ({ updateContact, updateImage }) => {
   );
 };
 
-export default ContactDetail;
+export default ContactDetails;
