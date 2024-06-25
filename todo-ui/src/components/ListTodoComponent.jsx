@@ -1,6 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
-import { deleteTodo, getAllTodos } from "../services/TodoService";
+import {
+  deleteTodo,
+  getAllTodos,
+  completeTodo,
+  inCompleteTodo
+} from "../services/TodoService";
 import { useNavigate } from "react-router-dom";
 
 const ListTodoComponent = () => {
@@ -21,12 +26,12 @@ const ListTodoComponent = () => {
     navigate("/add-todo");
   };
   const updateTodo = (id) => {
-    console.log(id);
+    // console.log(id);
     navigate(`/update-todo/${id}`);
   };
 
   const removeTodo = (id) => {
-    console.log(id);
+    // console.log(id);
     deleteTodo(id)
       .then((response) => {
         console.log(response.data);
@@ -36,6 +41,17 @@ const ListTodoComponent = () => {
         console.error(error);
       });
     alert("Todo deleted successfully");
+  };
+
+  const completedTodo = (id) => {
+    completeTodo(id)
+      .then((response) => {
+        console.log(response.data);
+        listTodos();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -76,6 +92,13 @@ const ListTodoComponent = () => {
                       style={{ marginLeft: "10px" }}
                     >
                       Delete
+                    </button>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => completedTodo(todo.id)}
+                      style={{ marginLeft: "10px" }}
+                    >
+                      Complete
                     </button>
                   </td>
                 </tr>
