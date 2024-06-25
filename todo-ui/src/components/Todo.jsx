@@ -1,26 +1,36 @@
 import { useState } from "react";
+import { saveTodo } from "../services/TodoService";
+import { useNavigate } from "react-router-dom";
 
 const Todo = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [completed, setCompleted] = useState(false);
+  const navigate = useNavigate();
 
+  const saveOrUpdateTodo = (e) => {
+    e.preventDefault();
 
-  const saveTodo = (e) => {
-        e.preventDefault();
-
-        const todo = {title, description, completed};
-        console.log(todo);
-  }
+    const todo = { title, description, completed };
+    console.log(todo);
+    saveTodo(todo)
+      .then((response) => {
+        console.log(response.data);
+        navigate("/todos");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <>
       <div className="container">
-        <br/> <br/>
+        <br /> <br />
         <div className="row">
           <div className="card col-md-6 offset-md-3 offset-md-3">
             <h2 className="text-center">Add Todo </h2>
             <div className="card-body">
-              <form>
+              <form >
                 <div className="form-group mb-2">
                   <label className="form-label">
                     <b> Title : </b>
@@ -65,7 +75,7 @@ const Todo = () => {
 
                 <button
                   className="btn btn-success w-100 mt-3"
-                  onClick={(e) => saveTodo(e)}
+                  onClick={(e) => saveOrUpdateTodo(e)}
                 >
                   Submit{" "}
                 </button>
