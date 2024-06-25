@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { saveTodo } from "../services/TodoService";
+import { useEffect, useState } from "react";
+import { getTodo, saveTodo, updateTodo } from "../services/TodoService";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Todo = () => {
@@ -11,17 +11,28 @@ const Todo = () => {
 
   const saveOrUpdateTodo = (e) => {
     e.preventDefault();
-
     const todo = { title, description, completed };
     console.log(todo);
-    saveTodo(todo)
-      .then((response) => {
-        console.log(response.data);
-        navigate("/todos");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+
+    if (id) {
+      updateTodo(id, todo)
+        .then((response) => {
+          console.log(response.data);
+          navigate("/todos");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      saveTodo(todo)
+        .then((response) => {
+          console.log(response.data);
+          navigate("/todos");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   const pageTitle = () => {
@@ -31,6 +42,19 @@ const Todo = () => {
       return <h2 className="text-center">Add Todo </h2>;
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      getTodo(id)
+        .then((response) => {
+          console.log(response.data);
+          setTitle(response.data.title);
+          setDescription(response.data.description);
+          setCompleted(response.data.completed);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [id]);
 
   return (
     <>
