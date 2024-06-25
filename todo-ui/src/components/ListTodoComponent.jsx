@@ -1,9 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import { getAllTodos } from "../services/TodoService";
+import { useNavigate } from "react-router-dom";
+
 
 const ListTodoComponent = () => {
   const [todos, setTodos] = useState([]);
+  const naviagte = useNavigate();
 
   useEffect(() => {
     const fetchData = () => {
@@ -14,10 +17,15 @@ const ListTodoComponent = () => {
     fetchData();
   }, []);
 
+  const addTodo = () => {
+    naviagte('/add-todo');
+  }
+
 
   return (
     <div className="container">
       <h2 className="text-center">List of Todos</h2>
+      <button className="btn btn-primary mb-2" onClick={addTodo}>Add Todos</button>
       <div>
         <table className="table table-bordered table-striped text-center">
           <thead>
