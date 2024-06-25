@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { saveTodo } from "../services/TodoService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Todo = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [completed, setCompleted] = useState(false);
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const saveOrUpdateTodo = (e) => {
     e.preventDefault();
@@ -22,15 +23,24 @@ const Todo = () => {
         console.error(error);
       });
   };
+
+  const pageTitle = () => {
+    if (id) {
+      return <h2 className="text-center">Update Todo </h2>;
+    } else {
+      return <h2 className="text-center">Add Todo </h2>;
+    }
+  };
+
   return (
     <>
       <div className="container">
         <br /> <br />
         <div className="row">
           <div className="card col-md-6 offset-md-3 offset-md-3">
-            <h2 className="text-center">Add Todo </h2>
+            {pageTitle()}
             <div className="card-body">
-              <form >
+              <form>
                 <div className="form-group mb-2">
                   <label className="form-label">
                     <b> Title : </b>
