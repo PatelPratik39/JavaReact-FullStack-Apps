@@ -1,9 +1,10 @@
-import "./App.css";
+
+import ListTodoComponent from "./components/ListTodoComponent";
 
 function App() {
   return (
     <>
-      <h1>Vite + React</h1>
+      <ListTodoComponent />
     </>
   );
 }
