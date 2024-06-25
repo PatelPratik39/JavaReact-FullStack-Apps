@@ -29,11 +29,19 @@ public class TodoController {
         TodoDto todoDto = todoService.getTodo(todoId);
         return new ResponseEntity<>(todoDto, HttpStatus.OK);
     }
+
     //    Build REST API to get all todos
     @GetMapping
     public ResponseEntity<List<TodoDto>> getAllTodos(){
         List<TodoDto> todos = todoService.getAllTodos();
-//        return new ResponseEntity<>(todos, HttpStatus.OK);
+    //        return new ResponseEntity<>(todos, HttpStatus.OK);
         return ResponseEntity.ok(todos);
+    }
+
+//    Build REST API for update todos
+    @PutMapping("{id}")
+    public ResponseEntity<TodoDto> updateTodos(@RequestBody TodoDto todoDto, @PathVariable("id") Long todoId) {
+        TodoDto updatedTodo = todoService.updateTodo(todoDto,todoId);
+        return ResponseEntity.ok(updatedTodo);
     }
 }
