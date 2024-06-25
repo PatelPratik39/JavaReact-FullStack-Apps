@@ -1,3 +1,20 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "xprotocol",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 33060,
+            "driver": "MySQL",
+            "database": "todo_management",
+            "username": "root",
+            "name": "MySQL Local",
+            "password": "Pratik39",
+            "connectionTimeout": 30
+        }
+    ]
 }
