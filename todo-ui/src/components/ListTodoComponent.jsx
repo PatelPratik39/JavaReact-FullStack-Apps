@@ -8,6 +8,7 @@ import {
 } from "../services/TodoService";
 import { useNavigate } from "react-router-dom";
 
+
 const ListTodoComponent = () => {
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
@@ -54,14 +55,28 @@ const ListTodoComponent = () => {
       });
   };
 
+  const InCompletedTodo = (id) => {
+    inCompleteTodo(id)
+      .then((response) => {
+        console.log(response.data);
+        listTodos();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
-    <div className="container">
+    <div className="container" >
       <h2 className="text-center">List of Todos</h2>
       <button className="btn btn-success mb-2" onClick={addTodo}>
         Add Todos
       </button>
-      <div>
-        <table className="table table-bordered table-striped text-center">
+      <div style={{ overflowX: "auto" }}>
+        <table
+          className="table table-bordered table-striped text-center"
+
+        >
           <thead>
             <tr>
               <th>Todo ID</th>
@@ -79,33 +94,43 @@ const ListTodoComponent = () => {
                   <td>{todo.title}</td>
                   <td>{todo.description}</td>
                   <td>{todo.completed ? "Yes" : "No"}</td>
-                  <td>
+                  <td style={{ whiteSpace: "nowrap" }}>
+                    {" "}
+                    {/* Prevent wrapping */}
                     <button
                       className="btn btn-warning"
                       onClick={() => updateTodo(todo.id)}
+                      style={{ margin: "0 5px" }}
                     >
                       Update
                     </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => removeTodo(todo.id)}
-                      style={{ marginLeft: "10px" }}
+                      style={{ margin: "0 5px" }}
                     >
                       Delete
                     </button>
                     <button
                       className="btn btn-success"
                       onClick={() => completedTodo(todo.id)}
-                      style={{ marginLeft: "10px" }}
+                      style={{ margin: "0 5px" }}
                     >
                       Complete
+                    </button>
+                    <button
+                      className="btn btn-info"
+                      onClick={() => InCompletedTodo(todo.id)}
+                      style={{ margin: "0 5px" }}
+                    >
+                      InComplete
                     </button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="4">No todos available</td>
+                <td colSpan="5">No todos available</td>
               </tr>
             )}
           </tbody>
