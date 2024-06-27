@@ -130,7 +130,7 @@ const ListTodoComponent = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="5">No todos available</td>
+                <td colSpan="5">No Todos Available !! 🤷🏻‍♂️</td>
               </tr>
             )}
           </tbody>
